@@ -1,0 +1,59 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+      <mat-toolbar>
+        <div>
+          <img src="../../assets/logo.png" alt="" style="width: 150px;">
+        </div>
+      </mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item autofocus style="background-color:rgb(167, 167, 167)" routerLink="/admin"><span style="font-size:30px;margin-right: 8%;padding-left: 3%;"><i class="bi bi-headset"></i></span><strong>Teleoperadores</strong></a>
+        <a mat-list-item routerLink="/clientesadmin" ><span style="font-size:30px;margin-right: 8%;padding-left: 3%;"><i class="bi bi-people"></i></span><strong>Clientes</strong></a>
+        <a mat-list-item routerLink="/keywordsadmin"> <span style="font-size: 30px;padding-left: 3%;margin-right: 6%;"><i class="bi bi-key"></i></span><strong style="font-size:13px">Palabras Clave de Teleoperadores</strong></a>
+        <a mat-list-item routerLink="/" style="margin-top: 360%;" (click)="logOut()"><span style="font-size:30px;margin-right: 8%;padding-left: 3%;"><i class="bi bi-power"></i></span><strong>Salir</strong></a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar style="height: 70px;background-color: white;">
+        <span style="justify-content: flex-start;color: black;">Teleoperadores</span>
+        <div style="margin-left:85%;display: flex;color: black;"  >
+          <div>
+            <img src="../../assets/boss.png" alt="" style="width: 60px;height:60px">
+          </div>
+         
+         <div>
+          <div>
+            Grecia
+          </div>
+          <div>
+            Admi
+          </div>
+
+         </div>
+        </div>
+      </mat-toolbar>
+      <table class="table">
+        <thead>
+          <th scope="col" class="headersTable">ID</th>
+          <th scope="col" class="headersTable" style="padding-left: 3%;">NOMBRES</th>
+          <th scope="col" class="headersTable" style="padding-left: 3%;">APELLIDOS</th>
+          <th scope="col" class="headersTable" style="padding-left: 4.5%;">NIVEL DE EXPERIENCIA</th>
+          <th scope="col" class="headersTable" style="padding-left: 3%;">INFORMACIÓN ADICIONAL</th>
+          <th scope="col" class="headersTable" style="padding-left: 3%;">ASIGNAR PALABRA CLAVE</th>
+        </thead>
+        <tr *ngFor="let operator of operators;let i = index" style="margin: auto; padding: auto;">
+          <th scope="row">{{i+1}}</th>
+          <td style="padding-left: 3%;">{{operator.name}}</td>
+          <td style="padding-left: 3%;">{{operator.lastName}}</td>
+          <td style="padding-left: 5%;" *ngIf="operator.type=='PENDIENTE'"><button type="button" class="btn btn-warning" style="background-color: orange;color: white; width: 130px; opacity: 80%;" (click)="changeType(operator)">¡{{operator.type}}!</button></td>
+          <td style="padding-left: 5%;" *ngIf="operator.type=='NOVATO'"><button type="button" class="btn" style="background-color: teal;color: white; width: 130px; opacity: 80%;" (click)="changeType(operator)">{{operator.type}}</button></td>
+          <td style="padding-left: 5%;" *ngIf="operator.type=='EXPERTO'"><button type="button" class="btn" style="background-color: blue;color: white; width: 130px;" (click)="changeType(operator)">{{operator.type}}</button></td>
+          <td style="padding-left: 0.7%;"><button class="rounded-pill" (click)="seeMoreInfo(operator)">Ver más</button></td>
+          <td style="padding-left: 1%;"><button class="rounded-pill" (click)="assignKeyWord(operator)">Asignar</button></td>
+        </tr>
+      </table>     
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

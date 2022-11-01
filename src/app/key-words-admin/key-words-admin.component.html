@@ -1,0 +1,57 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+      <mat-toolbar>
+        <div>
+          <img src="../../assets/logo.png" alt="" style="width: 150px;">
+        </div>
+      </mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/admin"><span style="font-size:30px;margin-right: 8%;padding-left: 3%;"><i class="bi bi-headset"></i></span><strong>Teleoperadores</strong></a>
+        <a mat-list-item routerLink="/clientesadmin" ><span style="font-size:30px;margin-right: 8%;padding-left: 3%;"><i class="bi bi-people"></i></span><strong>Clientes</strong></a>
+        <a mat-list-item style="background-color:rgb(167, 167, 167)"> <span style="font-size: 30px;padding-left: 3%;margin-right: 6%;"><i class="bi bi-key"></i></span><strong style="font-size:13px">Palabras Clave de Teleoperadores</strong></a>
+        <a mat-list-item routerLink="/" style="margin-top: 360%;" (click)="logOut()"><span style="font-size:30px;margin-right: 8%;padding-left: 3%;"><i class="bi bi-power"></i></span><strong>Salir</strong></a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar style="height: 70px;background-color: white;">
+        <span style="justify-content: flex-start;color: black;">Clientes</span>
+        <div style="margin-left:89%;display: flex;color: black;"  >
+          <div>
+            <img src="../../assets/boss.png" alt="" style="width: 60px;height:60px">
+          </div>
+         
+         <div>
+          <div>
+            Grecia
+          </div>
+          <div>
+            Admi
+          </div>
+
+         </div>
+        </div>
+      </mat-toolbar>
+      <button type="button" class="btn btn-primary" style="margin-left: 40%;margin-top:5%" (click)="addNewKeyword()">Añadir palabra clave</button>
+      <table class="table">
+        <thead>
+          <th scope="col">ID</th>
+          <th scope="col" style="padding-left: 15%;">PALABRA CLAVE</th>
+          <th scope="col" style="padding-left: 3%;">ESTADO</th>
+          <th scope="col" style="padding-left: 9.5%;">ACCIÓN</th>
+          
+        </thead>
+        <tr *ngFor="let key of keywords;let i = index" >
+            <th scope="row" style="padding-right: 3%;">000{{i+80}}</th>
+            <td style="padding-left: 15%;">{{key.name}}</td>
+            <td *ngIf="key.active==true"><button mat-raised-button class="btn" style="background-color: #3CFF33;width: 100px;color: black;" (click)="changeToInactive(key)">Activo</button></td>
+            <td *ngIf="key.active==false"><button mat-stroked-button class="btn" style="background-color: red; width: 100px;color: white;opacity: 60%;" (click)="changeToActive(key)">Inactivo</button></td>
+            <td><button type="button" class="rounded-pill" style="width: 100px;" (click)="updateInfo(key)">Modificar</button></td>
+        </tr>
+      </table>     
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  

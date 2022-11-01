@@ -1,0 +1,64 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+      <mat-toolbar>
+        <div>
+          <img src="../../assets/logo.png" alt="" style="width: 150px;">
+        </div>
+      </mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/admin"><span style="font-size:30px;margin-right: 8%;padding-left: 3%;"><i class="bi bi-headset"></i></span><strong>Teleoperadores</strong></a>
+        <a mat-list-item  style="background-color:rgb(167, 167, 167)"><span style="font-size:30px;margin-right: 8%;padding-left: 3%;"><i class="bi bi-people"></i></span><strong>Clientes</strong></a>
+        <a mat-list-item routerLink="/keywordsadmin"> <span style="font-size: 30px;padding-left: 3%;margin-right: 6%;"><i class="bi bi-key"></i></span><strong style="font-size:13px">Palabras Clave de Teleoperadores</strong></a>
+        <a mat-list-item routerLink="/" style="margin-top: 360%;" (click)="logOut()"><span style="font-size:30px;margin-right: 8%;padding-left: 3%;"><i class="bi bi-power"></i></span><strong>Salir</strong></a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar style="height: 70px;background-color: white;">
+        <span style="justify-content: flex-start;color: black;">Clientes</span>
+        <div style="margin-left:89%;display: flex;color: black;"  >
+          <div>
+            <img src="../../assets/boss.png" alt="" style="width: 60px;height:60px">
+          </div>
+         
+         <div>
+          <div>
+            Grecia
+          </div>
+          <div>
+            Admi
+          </div>
+
+         </div>
+        </div>
+      </mat-toolbar>
+      <table class="table">
+        <thead>
+          <th scope="col">ID</th>
+          <th scope="col" style="padding-left: 3%;">NOMBRES</th>
+          <th scope="col" style="padding-left: 3%;">APELLIDOS</th>
+          <th scope="col" style="padding-left: 7.3%;">DNI</th>
+          <th scope="col" style="padding-left: 11%;">TELÉFONO</th>
+          <th scope="col" style="padding-left: 17.5%;">KEYWORDS</th>
+          <th scope="col" style="padding-left: 14%;">DISCURSO</th>
+          <th scope="col" style="padding-left: 10%;">ASIGNAR</th>
+          <!--<th style="padding-left: 9%;">INFORMACIÓN</th>-->
+        </thead>
+        <tr *ngFor="let client of clients;let i = index">
+          <th scope="row" style="padding-right: 3%;">{{i+1}}</th>
+          <td style="padding-left: 3%;">{{client.name}}</td>
+          <td style="padding-left: 3%;">{{client.lastName}}</td>
+          <td style="padding-left: 6%;">{{client.dni}}</td>
+          <td style="padding-left: 11%;">{{client.phone}}</td>
+          <td style="padding-left: 12%;"><button class="rounded-pill" (click)="seeKeyWords(client)">Ver Palabras Clave</button></td>
+          <td style="padding-left: 8%;"><button class="rounded-pill" (click)="seeSpeech(client)">Ver Speech</button></td>
+          <td style="padding-left: 4%;"><button class="rounded-pill" (click)="asignar(client)">Asignar</button></td>
+          <!--<td  style="padding-left:4%"><button class="rounded-pill" (click)="seeInfoClient(client)">Ver más</button></td>-->
+        </tr>
+      </table>     
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  
